@@ -1,5 +1,16 @@
 # Shorts Studio — Script Writer
 
+## Current Milestone: v1.0 Script Generator
+
+**Goal:** Build a `/script-generator` Claude Code skill that learns from viral training scripts and generates new YouTube Shorts commentary scripts using niche-isolated memory on disk.
+
+**Target features:**
+- Niche-isolated memory structure (`niches/ai-commentary/`)
+- Analyzer workflow: ingest viral transcripts → extract patterns → write structured memory files
+- Generator workflow: read memory → take video summary → output 2-3 script variations
+- System prompt auto-generated from first batch of training scripts
+- Anti-patterns enforcement and feedback tracking (token-efficient)
+
 ## What This Is
 
 A script generation tool for YouTube Shorts in the AI commentary niche. Takes video context (either AI-analyzed video or a user-provided summary) combined with learned niche patterns, and outputs engaging timed commentary scripts. This is the first standalone component of a larger pipeline that will eventually automate the full Shorts creation workflow.
@@ -16,15 +27,15 @@ Generate scripts that maximize viewer retention and engagement — the script is
 
 ### Active
 
-- [ ] Accept video context as input (video file or text summary)
-- [ ] Analyze video to identify key engaging moments (if video input is viable)
-- [ ] Generate timed commentary script matching video visually
-- [ ] Niche memory system that learns patterns from training videos
-- [ ] Hook that lands in first 2-3 seconds
-- [ ] Tone: mix of hype and conversational
-- [ ] Memory builder that extracts patterns from training videos (user's + competitors')
-- [ ] Niche isolation — each niche has its own memory, never shared
-- [ ] Design for easy LLM provider swapping (start with Claude API)
+- [ ] Claude Code skill (`/script-generator`) as single entry point with niche selection
+- [ ] Niche-isolated memory structure on disk (`niches/{niche}/`)
+- [ ] Analyzer workflow: ingest viral transcript + views + notes → structured memory file
+- [ ] Auto-generate niche `system-prompt.md` from first batch of training scripts
+- [ ] Generator workflow: read memory → video summary input → 2-3 script variations
+- [ ] Each variation structured as [HOOK] / [BUILD] / [PAYOFF] with section annotations
+- [ ] Voice check pass: flag phrases that sound generic after generation
+- [ ] Anti-patterns enforcement on every generation call
+- [ ] Feedback tracking: brief per-niche notes, max 5 bullets, included in generation
 
 ### Out of Scope
 
@@ -66,4 +77,4 @@ Generate scripts that maximize viewer retention and engagement — the script is
 | Dual input: video file OR text summary | Hedge against video analysis being too expensive | — Pending |
 
 ---
-*Last updated: 2026-03-26 after initialization*
+*Last updated: 2026-03-29 after milestone v1.0 started — Script Generator*
