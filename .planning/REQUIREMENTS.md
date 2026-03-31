@@ -10,8 +10,8 @@
 - [x] **MEM-01**: Niche-isolated directory structure exists (`niches/{niche}/`) with support for multiple niches
 - [x] **MEM-02**: `niches.md` lists available niches; user can add new niches by editing it
 - [x] **MEM-03**: Each training script stored as a structured markdown file with YAML frontmatter (title, source, views, quality_tier, hook_type)
-- [ ] **MEM-04**: `anti-patterns.md` exists per niche with documented schema (empty content — user fills)
-- [ ] **MEM-05**: `feedback.md` exists per niche, capped at 5 bullets, user-appended via conversation
+- [x] **MEM-04**: `anti-patterns.md` exists per niche with documented schema (empty content — user fills)
+- [x] **MEM-05**: `feedback.md` exists per niche, capped at 5 bullets, user-appended via conversation
 
 ### Analyzer Workflow
 
@@ -66,8 +66,8 @@
 | MEM-01 | Phase 1 | Complete |
 | MEM-02 | Phase 1 | Complete |
 | MEM-03 | Phase 1 | Complete |
-| MEM-04 | Phase 1 | Pending |
-| MEM-05 | Phase 1 | Pending |
+| MEM-04 | Phase 1 | Complete |
+| MEM-05 | Phase 1 | Complete |
 | ANLZ-01 | Phase 2 | Pending |
 | ANLZ-02 | Phase 2 | Pending |
 | ANLZ-03 | Phase 2 | Pending |
