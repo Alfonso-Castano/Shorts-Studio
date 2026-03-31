@@ -28,7 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `niches.md` lists ai-commentary as an available niche and a user can add a new niche by editing it
   3. `anti-patterns.md` and `feedback.md` exist per niche with documented schemas ready for user content
   4. A training script file can be placed in `niches/ai-commentary/scripts/` with correct YAML frontmatter and is recognized by the schema
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
+- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
 
 ### Phase 2: Analyzer Workflow
 **Goal**: User can invoke `/script-generator`, pick a niche, and run the Analyzer to ingest a viral transcript into structured memory
@@ -40,7 +44,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. A structured script file appears in `niches/ai-commentary/scripts/` with all required YAML frontmatter fields populated
   4. When no `system-prompt.md` exists, the first Analyzer run generates one from the ingested scripts
   5. If the transcript contains phrases matching `anti-patterns.md`, the Analyzer flags them before saving
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
+- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
 
 ### Phase 3: Generator Workflow
 **Goal**: User can invoke `/script-generator`, pick a niche, and run the Generator to receive 2-3 ready-to-use script variations from memory
@@ -51,7 +59,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. After providing a 3-5 sentence video summary, Claude outputs 2-3 script variations each with timed [HOOK] / [BUILD] / [PAYOFF] sections and a brief annotation per section
   3. Voice check runs automatically and flags any phrases that sound generic or interchangeable with other AI commentary channels
   4. User can say "remember for next time that..." and the skill appends the note to `feedback.md`, trimmed to 5 bullets
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
+- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
 
 ### Phase 4: Tune & Validate
 **Goal**: The skill produces script output that is demonstrably shaped by niche memory and usable with minimal rewrites
@@ -60,7 +72,11 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Success Criteria** (what must be TRUE):
   1. Running the Generator with memory enabled produces visibly different scripts compared to running without memory context — hooks, vocabulary, and pacing reflect the training scripts
   2. 5 real scripts are generated and the user can use them with less than 40% manual rewriting on average
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
+- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
 
 ## Progress
 
