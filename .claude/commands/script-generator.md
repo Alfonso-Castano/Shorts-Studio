@@ -151,6 +151,90 @@ Field type rules (non-negotiable):
 
 ---
 
+### Step 5: Await Approval and Write Script File
+
+**Approval detection:** Any affirmative reply from the user triggers file writing. Affirmative signals include: "save", "looks good", "go ahead", "yes", "approved", or similar. Anything else is treated as a revision request — Claude revises the draft and re-displays it before asking for approval again.
+
+When approval is received:
+
+1. List the `niches/{selected-niche}/scripts/` directory to find the current highest NNN number. If the directory is empty, use `001`. Otherwise, increment the highest existing number by 1.
+2. Construct the filename: `{NNN}-{hook-type-slug}.md` where hook-type-slug is the kebab-case `hook_type` from the YAML (e.g., `003-contrast-reveal.md`)
+3. Write the complete script file to `niches/{selected-niche}/scripts/{filename}` — include the full YAML frontmatter block (---delimited) followed by `## Transcript` section (with [HOOK]/[BUILD]/[PAYOFF] labels) followed by `## Analysis` section (with 6 bold-named fields)
+
+---
+
+### Step 6: Post-Save Operations
+
+After writing the script file, perform TWO operations in this order:
+
+**Operation A — Update patterns.md:**
+
+Re-read all `.md` files in `niches/{selected-niche}/scripts/`. Synthesize patterns across all scripts and rewrite `niches/{selected-niche}/patterns.md` with this structure:
+
+```
+# Patterns: {selected-niche}
+
+**Last updated:** {today's ISO date} — {N} scripts analyzed
+
+---
+
+## Hook Patterns
+[Recurring hook techniques observed across scripts, with frequency notes]
+
+## Pacing Patterns
+[Energy flow and timing patterns observed across scripts]
+
+## Sentence Structure Norms
+[Length, rhythm, declarative vs. question ratios]
+
+## Storytelling Approaches
+[Setups, contrasts, reveals, and structures that recur]
+
+## What Consistently Works
+[Cross-cutting synthesis — what makes these scripts succeed]
+```
+
+If only 1 script exists, add a note at the top (after the `---` separator, before `## Hook Patterns`): `Patterns from 1 script — limited synthesis available. Add more scripts for reliable patterns.`
+
+**Operation B — Check system-prompt.md trigger:**
+
+Count the `.md` files now in `niches/{selected-niche}/scripts/` (including the file just written).
+
+If count < 3: skip system-prompt.md generation. This will be noted in the Step 7 summary.
+
+If count >= 3 AND `niches/{selected-niche}/system-prompt.md` still contains the line `STATUS: Not yet generated`: generate the system prompt using this sequence:
+
+1. Re-read all scripts in `scripts/` (already done for patterns.md — reuse that context)
+2. Generate a niche system prompt covering:
+   - Creator voice and tone (derived from writing_style patterns across scripts)
+   - Niche-specific style rules (from hook_patterns, sentence_structure, pacing)
+   - What makes a script succeed in this niche (from why_it_works patterns)
+   - What to avoid (from anti-patterns.md if non-empty; from common weaknesses identified in analysis)
+3. Display the generated system prompt as a draft with this message: "Here's the system prompt I've derived from your 3 training scripts. Reply with 'save system prompt' to write it to disk, or tell me what to change."
+4. **STOP.** Do not write `system-prompt.md` until the user explicitly approves with "save system prompt" or equivalent affirmative.
+
+If count >= 3 but `system-prompt.md` does NOT contain `STATUS: Not yet generated` (already generated): skip silently.
+
+---
+
+### Step 7: Post-Save Summary
+
+After completing Step 6 (and after `system-prompt.md` is written if triggered), output ONE summary line:
+
+**Format when count >= 3 after this save:**
+```
+Saved {filename} (Tier {N}, {views formatted naturally e.g. 2.4M views}). {niche} now has {count} training scripts.
+```
+
+**Format when count < 3 after this save:**
+```
+Saved {filename} (Tier {N}, {views formatted naturally}). system-prompt.md will generate after 3 scripts are ingested (currently: {count}).
+```
+
+After the summary line, Claude is ready for another transcript. Do not re-ask the opening niche/mode question — the session context is maintained.
+
+---
+
 ## Generator Path
 
 _Phase 3 — not yet implemented._
