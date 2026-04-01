@@ -15,13 +15,13 @@
 
 ### Analyzer Workflow
 
-- [ ] **ANLZ-01**: User invokes `/script-generator`, selects niche, selects Analyzer
-- [ ] **ANLZ-02**: Skill prompts user to paste transcript + view count + notes in one message
-- [ ] **ANLZ-03**: Claude analyzes transcript and segments it into [HOOK] / [BUILD] / [PAYOFF] with written analysis (hook technique, build strategy, payoff, why it works)
-- [ ] **ANLZ-04**: Quality tier assigned based on view count (Tier 1 >1M, Tier 2 100K–1M, Tier 3 <100K)
+- [x] **ANLZ-01**: User invokes `/script-generator`, selects niche, selects Analyzer
+- [x] **ANLZ-02**: Skill prompts user to paste transcript + view count + notes in one message
+- [x] **ANLZ-03**: Claude analyzes transcript and segments it into [HOOK] / [BUILD] / [PAYOFF] with written analysis (hook technique, build strategy, payoff, why it works)
+- [x] **ANLZ-04**: Quality tier assigned based on view count (Tier 1 >1M, Tier 2 100K–1M, Tier 3 <100K)
 - [ ] **ANLZ-05**: Structured script file written to `niches/{niche}/scripts/` with correct schema
 - [ ] **ANLZ-06**: If `system-prompt.md` does not yet exist, analyzer generates it from the ingested scripts
-- [ ] **ANLZ-07**: Analyzer flags any phrases in the transcript that match `anti-patterns.md`
+- [x] **ANLZ-07**: Analyzer flags any phrases in the transcript that match `anti-patterns.md`
 
 ### Generator Workflow
 
@@ -68,13 +68,13 @@
 | MEM-03 | Phase 1 | Complete |
 | MEM-04 | Phase 1 | Complete |
 | MEM-05 | Phase 1 | Complete |
-| ANLZ-01 | Phase 2 | Pending |
-| ANLZ-02 | Phase 2 | Pending |
-| ANLZ-03 | Phase 2 | Pending |
-| ANLZ-04 | Phase 2 | Pending |
+| ANLZ-01 | Phase 2 | Complete |
+| ANLZ-02 | Phase 2 | Complete |
+| ANLZ-03 | Phase 2 | Complete |
+| ANLZ-04 | Phase 2 | Complete |
 | ANLZ-05 | Phase 2 | Pending |
 | ANLZ-06 | Phase 2 | Pending |
-| ANLZ-07 | Phase 2 | Pending |
+| ANLZ-07 | Phase 2 | Complete |
 | GEN-01 | Phase 3 | Pending |
 | GEN-02 | Phase 3 | Pending |
 | GEN-03 | Phase 3 | Pending |
@@ -92,4 +92,4 @@
 
 ---
 *Requirements defined: 2026-03-30*
-*Last updated: 2026-03-30 after initial definition*
+*Last updated: 2026-04-01 after Phase 2 Plan 01 — ANLZ-01, ANLZ-02, ANLZ-03, ANLZ-04, ANLZ-07 complete*

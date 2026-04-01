@@ -47,7 +47,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — Skill entry point, routing, Analyzer input collection, analysis, and draft display
+- [x] 02-01-PLAN.md — Skill entry point, routing, Analyzer input collection, analysis, and draft display (completed 2026-04-01)
 - [ ] 02-02-PLAN.md — Analyzer write path, patterns.md synthesis, system-prompt.md generation, human verification
 
 ### Phase 3: Generator Workflow
@@ -86,6 +86,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Memory Foundation | 2/2 | Complete   | 2026-03-31 |
-| 2. Analyzer Workflow | 0/2 | Ready | - |
+| 2. Analyzer Workflow | 1/2 | In Progress | - |
 | 3. Generator Workflow | 0/? | Not started | - |
 | 4. Tune & Validate | 0/? | Not started | - |
