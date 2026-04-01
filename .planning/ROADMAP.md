@@ -31,8 +31,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
-- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
+- [x] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
+- [x] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
 
 ### Phase 2: Analyzer Workflow
 **Goal**: User can invoke `/script-generator`, pick a niche, and run the Analyzer to ingest a viral transcript into structured memory
@@ -47,8 +47,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
-- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
+- [ ] 02-01-PLAN.md — Skill entry point, routing, Analyzer input collection, analysis, and draft display
+- [ ] 02-02-PLAN.md — Analyzer write path, patterns.md synthesis, system-prompt.md generation, human verification
 
 ### Phase 3: Generator Workflow
 **Goal**: User can invoke `/script-generator`, pick a niche, and run the Generator to receive 2-3 ready-to-use script variations from memory
@@ -62,8 +62,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
-- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
+- [ ] 03-01-PLAN.md — To be planned
+- [ ] 03-02-PLAN.md — To be planned
 
 ### Phase 4: Tune & Validate
 **Goal**: The skill produces script output that is demonstrably shaped by niche memory and usable with minimal rewrites
@@ -75,8 +75,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Directory structure, niches.md registry, and training script schema
-- [ ] 01-02-PLAN.md — Placeholder files (anti-patterns, feedback, patterns, system-prompt)
+- [ ] 04-01-PLAN.md — To be planned
+- [ ] 04-02-PLAN.md — To be planned
 
 ## Progress
 
@@ -86,6 +86,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Memory Foundation | 2/2 | Complete   | 2026-03-31 |
-| 2. Analyzer Workflow | 0/? | Not started | - |
+| 2. Analyzer Workflow | 0/2 | Ready | - |
 | 3. Generator Workflow | 0/? | Not started | - |
 | 4. Tune & Validate | 0/? | Not started | - |
