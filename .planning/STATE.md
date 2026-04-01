@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: In Progress — Phase 2
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-04-01T17:38:02Z"
-last_activity: 2026-04-01 — Phase 2 Plan 01 complete (script-generator entry point and Analyzer Steps 1-4)
+status: executing
+stopped_at: Checkpoint 02-02 Task 2 — awaiting human verification of full Analyzer workflow
+last_updated: "2026-04-01T17:43:07.438Z"
+last_activity: "2026-04-01 — Phase 2 Plan 01 complete: script-generator entry point and Analyzer Steps 1-4"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 4
-  completed_plans: 3
+  completed_plans: 4
   percent: 38
 ---
 
@@ -51,6 +51,7 @@ Progress: [███░░░░░░░] 38%
 
 *Updated after each plan completion*
 | Phase 01-memory-foundation P01 | 2 | 3 tasks | 3 files |
+| Phase 02-analyzer-workflow P02 | 5 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -73,6 +74,8 @@ Recent decisions affecting current work:
 - [Phase 02-analyzer-workflow P01]: Skill uses {selected-niche} variable throughout — never hardcodes ai-commentary, enabling future niche expansion
 - [Phase 02-analyzer-workflow P01]: Draft order locked: YAML first, anti-pattern notices second, segmented transcript third, 6-field analysis fourth
 - [Phase 02-analyzer-workflow P01]: Approval gate mandatory — Claude writes exact trigger line then stops, no file writes before 'save'
+- [Phase 02-analyzer-workflow]: system-prompt.md generation count check is performed AFTER the file is written — ensures the 3rd script counts toward the trigger threshold
+- [Phase 02-analyzer-workflow]: patterns.md is fully rewritten on every save, not incrementally — guarantees clean synthesis, never stale
 
 ### Pending Todos
 
@@ -84,6 +87,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-01T17:38:02Z
-Stopped at: Completed 02-01-PLAN.md
-Resume file: .planning/phases/02-analyzer-workflow/02-02-PLAN.md
+Last session: 2026-04-01T17:42:57.006Z
+Stopped at: Checkpoint 02-02 Task 2 — awaiting human verification of full Analyzer workflow
+Resume file: None

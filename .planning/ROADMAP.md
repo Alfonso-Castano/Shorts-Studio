@@ -13,7 +13,7 @@ Four phases deliver a working `/script-generator` Claude Code skill. Phase 1 est
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Memory Foundation** - Niche directory structure, schemas, and placeholder files on disk (completed 2026-03-31)
-- [ ] **Phase 2: Analyzer Workflow** - `/script-generator` skill with Analyzer path fully functional
+- [x] **Phase 2: Analyzer Workflow** - `/script-generator` skill with Analyzer path fully functional (completed 2026-04-01)
 - [ ] **Phase 3: Generator Workflow** - Generator path added to the skill, end-to-end script generation working
 - [ ] **Phase 4: Tune & Validate** - Real usage testing, prompt refinement, quality verification
 
@@ -86,6 +86,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Memory Foundation | 2/2 | Complete   | 2026-03-31 |
-| 2. Analyzer Workflow | 1/2 | In Progress | - |
+| 2. Analyzer Workflow | 2/2 | Complete   | 2026-04-01 |
 | 3. Generator Workflow | 0/? | Not started | - |
 | 4. Tune & Validate | 0/? | Not started | - |
