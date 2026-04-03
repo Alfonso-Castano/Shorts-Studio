@@ -30,13 +30,14 @@ After the user selects Analyzer, show this guided fill prompt verbatim:
 Paste the transcript details in one message:
 
 Views: [number]
+Velocity: [optional — how fast it got views, e.g. "went viral in 2 days", "slow burn over 3 weeks", "steady growth over 1 month"]
 Notes: [optional — anything notable about this script]
 Transcript: [paste here]
 
-Notes can be omitted if you have nothing to add.
+Velocity and Notes can be omitted if you have nothing to add.
 ```
 
-Wait for the user's single message containing all three inputs. Parse views, notes, and transcript from free-form context — do not require exact formatting. If the notes field is omitted, that is fine; proceed without it.
+Wait for the user's single message containing all inputs. Parse views, velocity, notes, and transcript from free-form context — do not require exact formatting. If velocity or notes are omitted, that is fine; proceed without them.
 
 ---
 
@@ -66,10 +67,19 @@ Perform the following analysis steps:
    - views >= 100,000   → `quality_tier: 2`
    - views < 100,000    → `quality_tier: 3`
    - `quality_tier` must be an unquoted integer: `1`, `2`, or `3` — never a string like `"Tier 1"` or `"1"`
+   - If the user provided velocity, note it mentally — it will appear in the YAML as a string.
 
-3. **Determine hook_type** as a kebab-case slug derived from the hook technique used in the transcript (e.g., `shocking-stat`, `contrast-reveal`, `direct-question`, `open-loop`).
+3. **Determine payoff_rating** (1–10 integer):
+   Rate how well the [PAYOFF] segment delivers on what the [HOOK] promised.
+   - 10 = fully satisfying, earns the hook
+   - 5–6 = partial delivery, some value but underwhelming
+   - 1–2 = pure clickbait — hook promises something the video never delivers
+   This rating exists to prevent the Generator from learning clickbait patterns. Use honest judgment; a 10/10 hook with a 2/10 payoff should score 2.
+   `payoff_rating` must be an unquoted integer 1–10.
 
-4. **Generate 6 analysis fields** — each field must be EXACTLY 2–3 sentences, no more, no fewer:
+5. **Determine hook_type** as a kebab-case slug derived from the hook technique used in the transcript (e.g., `shocking-stat`, `contrast-reveal`, `direct-question`, `open-loop`).
+
+6. **Generate 6 analysis fields** — each field must be EXACTLY 2–3 sentences, no more, no fewer:
    - `writing_style`
    - `hook_patterns`
    - `pacing`
@@ -77,7 +87,7 @@ Perform the following analysis steps:
    - `storytelling_technique`
    - `why_it_works`
 
-5. **Check for anti-patterns** — if anti-patterns.md contained bullet entries, check the full transcript for case-insensitive substring matches. Note each match for the draft.
+7. **Check for anti-patterns** — if anti-patterns.md contained bullet entries, check the full transcript for case-insensitive substring matches. Note each match for the draft.
 
 ---
 
@@ -91,7 +101,9 @@ Assemble and display the complete draft in this exact order:
 ---
 title: "Script title here"
 views: 2400000
+velocity: "went viral in 2 days"
 quality_tier: 1
+payoff_rating: 8
 hook_type: shocking-stat
 date_analyzed: YYYY-MM-DD
 ---
@@ -99,7 +111,9 @@ date_analyzed: YYYY-MM-DD
 
 Field type rules (non-negotiable):
 - `views` must be a plain integer — no quotes, no commas, no abbreviations (e.g., `views: 2400000` not `views: "2.4M"` or `views: 2,400,000`)
+- `velocity` must be a quoted string, or omitted entirely if the user did not provide it — do NOT invent a value
 - `quality_tier` must be an unquoted integer: `1`, `2`, or `3` — never a quoted string
+- `payoff_rating` must be an unquoted integer 1–10
 - `hook_type` must be a kebab-case slug
 - `date_analyzed` must be today's ISO date string (YYYY-MM-DD)
 
@@ -159,7 +173,7 @@ When approval is received:
 
 1. List the `niches/{selected-niche}/scripts/` directory to find the current highest NNN number. If the directory is empty, use `001`. Otherwise, increment the highest existing number by 1.
 2. Construct the filename: `{NNN}-{hook-type-slug}.md` where hook-type-slug is the kebab-case `hook_type` from the YAML (e.g., `003-contrast-reveal.md`)
-3. Write the complete script file to `niches/{selected-niche}/scripts/{filename}` — include the full YAML frontmatter block (---delimited) followed by `## Transcript` section (with [HOOK]/[BUILD]/[PAYOFF] labels) followed by `## Analysis` section (with 6 bold-named fields)
+3. Write the complete script file to `niches/{selected-niche}/scripts/{filename}` — include the full YAML frontmatter block (---delimited, including `velocity` if provided and `payoff_rating`) followed by `## Transcript` section (with [HOOK]/[BUILD]/[PAYOFF] labels) followed by `## Analysis` section (with 6 bold-named fields)
 
 ---
 
@@ -167,14 +181,21 @@ When approval is received:
 
 After writing the script file, perform TWO operations in this order:
 
-**Operation A — Update patterns.md:**
+**Operation A — Synthesis milestone check:**
+
+Count the total `.md` files now in `niches/{selected-niche}/scripts/` (including the file just written). Call this `total_count`.
+
+- **If `total_count % 5 != 0`:** skip patterns.md. In the Step 7 summary, note: `Synthesis will run at {next_milestone} scripts (currently: {total_count}).`
+- **If `total_count % 5 == 0`** (i.e., 5, 10, 15, ...): run the Synthesis Step below.
+
+**Synthesis Step** (every 5th save):
 
 Re-read all `.md` files in `niches/{selected-niche}/scripts/`. Synthesize patterns across all scripts and rewrite `niches/{selected-niche}/patterns.md` with this structure:
 
 ```
 # Patterns: {selected-niche}
 
-**Last updated:** {today's ISO date} — {N} scripts analyzed
+**Last updated:** {today's ISO date} — {total_count} scripts analyzed
 
 ---
 
@@ -193,8 +214,6 @@ Re-read all `.md` files in `niches/{selected-niche}/scripts/`. Synthesize patter
 ## What Consistently Works
 [Cross-cutting synthesis — what makes these scripts succeed]
 ```
-
-If only 1 script exists, add a note at the top (after the `---` separator, before `## Hook Patterns`): `Patterns from 1 script — limited synthesis available. Add more scripts for reliable patterns.`
 
 **Operation B — Check system-prompt.md trigger:**
 
@@ -248,9 +267,11 @@ If the user selects Generator, reply with:
 ## Constraints
 
 - **Niche variable**: All file paths must use `{selected-niche}` as a variable substituted with the user's selected niche. Never hardcode `ai-commentary` or any other niche name directly in path logic.
-- **YAML type strictness**: `views` is a plain integer (no quotes, no commas, no abbreviations). `quality_tier` is an unquoted integer 1, 2, or 3. No exceptions.
+- **YAML type strictness**: `views` is a plain integer (no quotes, no commas, no abbreviations). `quality_tier` is an unquoted integer 1, 2, or 3. `payoff_rating` is an unquoted integer 1–10. `velocity` is a quoted string or omitted — never invented. No exceptions.
 - **Analysis field cap**: Each of the 6 analysis fields is capped at 2–3 sentences. Enforce this limit — do not exceed it.
 - **Draft-then-approve**: Never write any files before receiving explicit user approval (`save` or equivalent confirmation). The approval gate is mandatory.
 - **Analyze in isolation**: Do NOT read individual training scripts in `scripts/` before analysis. Only read `anti-patterns.md` and `patterns.md` for context.
 - **Anti-patterns.md empty behavior**: When the file is empty, display the one-time message in the draft, then skip silently for all subsequent analyses in the same session.
 - **Exactly 6 analysis fields**: No more, no fewer. The required fields are: `writing_style`, `hook_patterns`, `pacing`, `sentence_structure`, `storytelling_technique`, `why_it_works`.
+- **Synthesis milestone**: patterns.md is only rewritten at every 5th save (total script count = 5, 10, 15, ...). All saved scripts contribute regardless of tier. Between milestones, skip the rewrite and note the next milestone in the Step 7 summary.
+- **payoff_rating honesty**: Rate the payoff independently from hook quality. A great hook with a weak payoff must receive a low payoff_rating. Do not inflate to match the views count or overall quality_tier.
