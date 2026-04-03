@@ -19,8 +19,8 @@
 - [x] **ANLZ-02**: Skill prompts user to paste transcript + view count + notes in one message
 - [x] **ANLZ-03**: Claude analyzes transcript and segments it into [HOOK] / [BUILD] / [PAYOFF] with written analysis (hook technique, build strategy, payoff, why it works)
 - [x] **ANLZ-04**: Quality tier assigned based on view count (Tier 1 >1M, Tier 2 100K–1M, Tier 3 <100K)
-- [ ] **ANLZ-05**: Structured script file written to `niches/{niche}/scripts/` with correct schema
-- [ ] **ANLZ-06**: If `system-prompt.md` does not yet exist, analyzer generates it from the ingested scripts
+- [x] **ANLZ-05**: Structured script file written to `niches/{niche}/scripts/` with correct schema
+- [x] **ANLZ-06**: If `system-prompt.md` does not yet exist, analyzer generates it from the ingested scripts
 - [x] **ANLZ-07**: Analyzer flags any phrases in the transcript that match `anti-patterns.md`
 
 ### Generator Workflow
@@ -72,8 +72,8 @@
 | ANLZ-02 | Phase 2 | Complete |
 | ANLZ-03 | Phase 2 | Complete |
 | ANLZ-04 | Phase 2 | Complete |
-| ANLZ-05 | Phase 2 | Pending |
-| ANLZ-06 | Phase 2 | Pending |
+| ANLZ-05 | Phase 2 | Complete |
+| ANLZ-06 | Phase 2 | Complete |
 | ANLZ-07 | Phase 2 | Complete |
 | GEN-01 | Phase 3 | Pending |
 | GEN-02 | Phase 3 | Pending |

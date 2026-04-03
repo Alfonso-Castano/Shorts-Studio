@@ -44,50 +44,52 @@ patterns-established:
 requirements-completed: [ANLZ-05, ANLZ-06]
 
 # Metrics
-duration: 5min
-completed: 2026-04-01
+duration: ~60min (includes human walkthrough)
+completed: 2026-04-02
 ---
 
 # Phase 2 Plan 02: Write Path, patterns.md Synthesis, and system-prompt.md Generation Summary
 
-**Analyzer write path with sequential script numbering, patterns.md synthesis after every save, and draft-then-approve system-prompt.md generation after 3rd script**
+**Complete Analyzer write path with sequential script numbering, patterns.md synthesis, and system-prompt.md generation after 3rd script — human-verified end-to-end with 3 real training scripts**
 
 ## Performance
 
-- **Duration:** ~5 min (Task 1 only — Task 2 is human checkpoint)
+- **Duration:** ~60 min (includes human walkthrough checkpoint)
 - **Started:** 2026-04-01T17:41:03Z
-- **Completed:** 2026-04-01T17:46:xx Z (checkpoint)
-- **Tasks:** 1 of 2 (Task 2 is human verification checkpoint)
+- **Completed:** 2026-04-02
+- **Tasks:** 2 of 2 (Task 1 auto + Task 2 human checkpoint — approved)
 - **Files modified:** 1
 
 ## Accomplishments
 
 - Appended Steps 5, 6, and 7 to `.claude/commands/script-generator.md` without touching Steps 1-4
 - Step 5: approval detection from affirmative signals, sequential NNN filename construction, full script file write to scripts/
-- Step 6 Op A: re-reads all scripts/ and rewrites patterns.md with 5-section structure after every save; 1-script limited-synthesis note included
+- Step 6 Op A: re-reads all scripts/ and rewrites patterns.md with 5-section structure after every qualifying save
 - Step 6 Op B: count-after-write check, STATUS sentinel detection, draft-then-approve gate for system-prompt.md generation
 - Step 7: one-line post-save summary with two format branches (count < 3 vs count >= 3), session context maintained
+- Human walkthrough verified all 7 ANLZ requirements: 3 scripts written to scripts/, patterns.md updated with real synthesis, system-prompt.md generated and approved
 
 ## Task Commits
 
 1. **Task 1: Add write path and post-save operations to skill file** - `5c9e62f` (feat)
-2. **Task 2: Human walkthrough — verify full Analyzer workflow end-to-end** - pending (checkpoint)
+2. **Task 2: Human walkthrough — verify full Analyzer workflow end-to-end** - human approved (no code commit)
 
-**Plan metadata:** pending final docs commit
+**Plan metadata:** see final docs commit
 
 ## Files Created/Modified
 
-- `.claude/commands/script-generator.md` — Added Steps 5-7 (84 lines appended after Step 4 approval gate)
+- `.claude/commands/script-generator.md` — Added Steps 5-7 completing the full Analyzer workflow
 
 ## Decisions Made
 
 - system-prompt.md generation count check is performed AFTER the file is written (not before) — ensures the 3rd script counts toward the trigger threshold
-- patterns.md is fully rewritten (not incrementally updated) on every save — simpler, always correct, never stale
+- patterns.md is fully rewritten (not incrementally updated) on every qualifying save — simpler, always correct, never stale
 - Post-save summary uses natural view formatting (e.g., "2.4M views") separate from YAML integer storage — display vs. data type separation
+- Post-plan user change: patterns.md synthesis milestone moved to every 5th Tier 1 save; velocity field and payoff_rating field also added per user request — applied separately after checkpoint
 
 ## Deviations from Plan
 
-None — Task 1 executed exactly as specified. Step structure, patterns.md format, system-prompt trigger logic, and summary line formats all match the plan spec precisely.
+None — plan executed exactly as written. Post-plan user-requested changes (velocity field in guided fill, synthesis milestone interval, payoff_rating) were applied separately after the checkpoint and committed outside this plan execution.
 
 ## Issues Encountered
 
@@ -99,10 +101,13 @@ None — no external service configuration required.
 
 ## Next Phase Readiness
 
-- Task 1 complete: full Analyzer workflow (Steps 1-7) is in the skill file and ready to use
-- Task 2 (human checkpoint) requires the user to run `/script-generator` in a new Claude Code session and ingest 3 transcripts to verify end-to-end behavior
-- No blockers. Resume after user verification is complete.
+- Full Analyzer workflow is complete and human-verified end-to-end
+- `niches/ai-commentary/scripts/` contains 3 training scripts with correct YAML frontmatter
+- `niches/ai-commentary/patterns.md` has been synthesized from training scripts
+- `niches/ai-commentary/system-prompt.md` has been generated from training data
+- Phase 3 (Generator Workflow) can read patterns.md and system-prompt.md as its primary inputs
+- No blockers.
 
 ---
 *Phase: 02-analyzer-workflow*
-*Completed: 2026-04-01 (checkpoint — Task 2 pending)*
+*Completed: 2026-04-02*
